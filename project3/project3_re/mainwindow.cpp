@@ -21,9 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
 //    QString r = "0", g = "0", b = "0";
 //    QString rgb = "background:rgb(" + r + "," + g + "," + b + ")";
     this->setStyleSheet("background:rgb(200, 170, 255)");
-    ui->Chating->setStyleSheet("background:rgb(255, 255, 255)");
-    ui->Name->setStyleSheet("background:rgb(255, 255, 255)");
-    ui->ipAddress->setStyleSheet("background:rgb(255, 255, 255)");
+//    ui->Chating->setStyleSheet("background:rgb(255, 255, 255)");
+//    ui->Name->setStyleSheet("background:rgb(255, 255, 255)");
+//    ui->ipAddress->setStyleSheet("background:rgb(255, 255, 255)");
     ui->Connect->setStyleSheet("background:hsla(120,100%,75%, 1)");
     ui->frame->setStyleSheet("background:hsla(120,100%,75%, 1)");
 

@@ -73,6 +73,8 @@ public:
         Name = new QLineEdit(page);
         Name->setObjectName(QString::fromUtf8("Name"));
         Name->setGeometry(QRect(85, 180, 250, 40));
+        Name->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);"));
         label = new QLabel(page);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(105, 110, 210, 60));
@@ -82,6 +84,8 @@ public:
         ipAddress = new QLineEdit(page);
         ipAddress->setObjectName(QString::fromUtf8("ipAddress"));
         ipAddress->setGeometry(QRect(85, 350, 250, 40));
+        ipAddress->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);"));
         label_2 = new QLabel(page);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(105, 280, 210, 60));
@@ -91,9 +95,13 @@ public:
         Chating = new QTextEdit(page_2);
         Chating->setObjectName(QString::fromUtf8("Chating"));
         Chating->setGeometry(QRect(0, 0, 421, 531));
+        Chating->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);"));
         Chat = new QLineEdit(page_2);
         Chat->setObjectName(QString::fromUtf8("Chat"));
         Chat->setGeometry(QRect(0, 540, 331, 41));
+        Chat->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);"));
         Disconnect = new QPushButton(page_2);
         Disconnect->setObjectName(QString::fromUtf8("Disconnect"));
         Disconnect->setGeometry(QRect(250, 600, 171, 51));
