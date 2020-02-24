@@ -41,7 +41,9 @@ private slots:
 
     void on_Chat_returnPressed();
 
-    void error();
+//    void error();
+
+    void on_Chat_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

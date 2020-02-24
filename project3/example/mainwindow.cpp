@@ -13,9 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Project3 남들과 함께 얘기해요 서버편");
-//    _server.listen(QHostAddress::Any, 8010);
     connect(&_server, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
-//    on_Open_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -43,12 +41,6 @@ void MainWindow::onNewConnection()
    connect(clientSocket, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(onSocketStateChanged(QAbstractSocket::SocketState)));
 
     _sockets.push_back(clientSocket);
-//    for (QTcpSocket* socket : _sockets) {
-//        socket->write(QByteArray::fromStdString(clientSocket->peerAddress().toString().toStdString() + " connected to server !\n"));
-//        QTextStream out(socket);
-//        QString strRead = "player connected to server !\n";
-//        out<<strRead;
-//    }
 }
 
 void MainWindow::onSocketStateChanged(QAbstractSocket::SocketState socketState)
@@ -63,21 +55,15 @@ void MainWindow::onSocketStateChanged(QAbstractSocket::SocketState socketState)
 void MainWindow::onReadyRead()
 {
     QTcpSocket* sender = static_cast<QTcpSocket*>(QObject::sender());
-    QTextStream in(sender);
 //    QByteArray datas = sender->readAll();
-    QString strRead = sender->readLine();;
+    QString strRead = sender->readLine();
 
-//    while(true){
-//        if(sender->canReadLine()){
-//            strRead = sender->readLine();
-//             break;
-//        }
-//    }
 
 
     for (QTcpSocket* socket : _sockets) {
         QTextStream out(socket);
         if (socket != sender)
             out<<strRead;
+//            socket->write(QByteArray::fromStdString(datas.toStdString()));
     }
 }

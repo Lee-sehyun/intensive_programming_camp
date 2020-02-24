@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     , tcpsocket(this)
 {
     ui->setupUi(this);
-//    this->setWindowFlag(Qt::WindowCloseButtonHint /*| Qt::NSWindowsFixedSizeDialogHint*/);
     this->setWindowTitle("Project3 남들과 함께 얘기해요");
 
 
@@ -21,20 +20,18 @@ MainWindow::MainWindow(QWidget *parent)
 //    QString r = "0", g = "0", b = "0";
 //    QString rgb = "background:rgb(" + r + "," + g + "," + b + ")";
     this->setStyleSheet("background:rgb(200, 170, 255)");
-//    ui->Chating->setStyleSheet("background:rgb(255, 255, 255)");
-//    ui->Name->setStyleSheet("background:rgb(255, 255, 255)");
-//    ui->ipAddress->setStyleSheet("background:rgb(255, 255, 255)");
     ui->Connect->setStyleSheet("background:hsla(120,100%,75%, 1)");
     ui->frame->setStyleSheet("background:hsla(120,100%,75%, 1)");
+    ui->widget->setStyleSheet("background:rgb(255,255,255)");
+    ui->Disconnect->setStyleSheet("background:hsla(120,100%,75%, 1)");
+    ui->stackedWidget->setCurrentIndex(0);
 
-//    tcpserver.listen(QHostAddress::Any, 8010);
 
-//    connect(&tcpserver, SIGNAL(newConnection()), this, SLOT(connected()));
+
     connect(&tcpsocket, SIGNAL(readyRead()), this, SLOT(read()));
     connect(&tcpsocket, SIGNAL(connected()), this, SLOT(onconnected_Server()));
     connect(&tcpsocket, SIGNAL(disconnected()), this, SLOT(disconnected()));
-    connect(&tcpsocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(error()));
-//    QObject::connect(&tcpsocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+//    connect(&tcpsocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(error()));
 
 }
 
@@ -72,7 +69,6 @@ void MainWindow::on_Disconnect_clicked()
 
     out << str;
 
-//    disconnected();
     tcpsocket.close();
 }
 
@@ -84,17 +80,6 @@ void MainWindow::connected(){
     else{
         tcpsocket.connectToHost(ip, 8010);
     }
-
-//    onconnected_Server();
-
-//    QTcpSocket *clientSocket = tcpserver.nextPendingConnection();
-//    connect(clientSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-//    connect(clientSocket, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(onSocketStateChanged(QAbstractSocket::SocketState)));
-
-//    tcpsockets.push_back(clientSocket);
-//    for (QTcpSocket* socket : tcpsockets) {
-//        socket->write(QByteArray::fromStdString(clientSocket->peerAddress().toString().toStdString() + " connected to server !\n"));
-//    }
 
 }
 
@@ -137,25 +122,15 @@ void MainWindow::send(){
 
         ui->Chating->append(strtemp);
 
-        //소켓으로 전송
+        //라인 전송
         out<<strtemp;
         ui->Chat->setText("");
     }
 
-//    strtemp = name + " : " + str;
-
-//    ui->Chating->append(strtemp);
-
-//    tcpsocket.write(str.toUtf8().constData());
-
-//    tcpsocket.flush();
-
-//    ui->Chat->setText("");
 
 
 
-
-
+//    바이트 전송
 //    QByteArray block;
 //    QDataStream out(&block, QIODevice::WriteOnly);
 
@@ -179,15 +154,6 @@ void MainWindow::read(){
     Message = tcpsocket.readLine();
     ui->Chating->append(Message);
 
-//    while(true){
-//        if(tcpsocket.canReadLine()){
-//            Message = tcpsocket.readLine();
-//            Messagetemp = name + " : " + Message;
-//            ui->Chating->append(Messagetemp);
-//            break;
-//        }
-//    }
-
 
 //    while(tcpsocket.canReadLine()){
 //        QByteArray buffer= tcpsocket.readLine();
@@ -205,16 +171,9 @@ void MainWindow::read(){
 //    QDataStream in(&tcpsocket);
 
 //    while(true){
-//        //nextBlcokSize 가 0 이면 아직 데이터를 못받은것
-//       if(nextBlockSize == 0){
-//           //수신된 데이터가 nextBlockSize 바이트보다 큰지 확인
-//           if(tcpsocket.bytesAvailable() < sizeof(quint16))
-//               ;
-//           else
-//               in>>nextBlockSize;
-//           continue;
-//       }
-//       else if(tcpsocket.bytesAvailable() < nextBlockSize)
+//       in>>nextBlockSize;
+
+//       if(tcpsocket.bytesAvailable() < nextBlockSize)
 //            continue;
 
 //       else if(tcpsocket.bytesAvailable() >= nextBlockSize){
@@ -234,6 +193,14 @@ void MainWindow::on_Chat_returnPressed()
     on_send_clicked();
 }
 
-void MainWindow::error(){
-    ui->Chating->setText(tcpsocket.errorString());
+//void MainWindow::error(){
+//    ui->ipAddress->setText(tcpsocket.errorString());
+//}
+
+void MainWindow::on_Chat_textChanged(const QString &arg1)
+{
+    if (arg1.size() == 0)
+        ui->send->setStyleSheet("background:rgba(100,100,100, 0.5)");
+    else
+        ui->send->setStyleSheet("background:rgb(255,255,0)");
 }
